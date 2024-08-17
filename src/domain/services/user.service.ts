@@ -20,7 +20,7 @@ const getUserToken = ({
   name: string;
   surname: string;
 }) => {
-  const jwtKey = "123-456-789";
+  const jwtKey = process.env.JWT_KEY;
 
   const jwtToken = sign({
     userId,
@@ -28,7 +28,7 @@ const getUserToken = ({
     name,
     surname,
   },
-    jwtKey,
+    jwtKey as string,
     {
       expiresIn: "1800000 ",
       algorithm: "HS256",

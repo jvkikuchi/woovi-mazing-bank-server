@@ -11,6 +11,14 @@ export const newTransaction = async (newTransactionInfo: {
 }): Promise<Transaction> => {
     const { receiverAccountNumber, senderAccountNumber, value } = newTransactionInfo;
 
+    if (value <= 0 || !value) {
+        throw new Error('Transaction value must be greater than 0');
+    };
+
+    if (!receiverAccountNumber || !senderAccountNumber) {
+        throw new Error('Both account numbers are required to create a transaction');
+    }
+
     const isSameReceiverAndSender = receiverAccountNumber === senderAccountNumber;
 
     if (isSameReceiverAndSender) {
